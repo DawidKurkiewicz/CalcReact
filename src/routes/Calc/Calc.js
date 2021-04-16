@@ -50,7 +50,7 @@ export const Calc = () => {
   return (
     <div className={style.calcContainer}>
       <div className={style.row}>
-        <Result input={inputValue} />
+        <Result inputValue={inputValue} />
         <ClearButton handleClear={clearInput}>Clear</ClearButton>
       </div>
       <div className={style.numberContainer}>
