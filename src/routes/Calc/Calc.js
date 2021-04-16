@@ -5,53 +5,52 @@ import ClearButton from "../../components/ClearButton";
 import style from "./Calc.module.css";
 
 export const Calc = () => {
-  const [input, setInput] = useState('');
+  const [inputValue, setInputValue] = useState('');
   const regex = new RegExp(/[\W_]/);
 
   const addValue = val => {
-    if (input === "0" || val === "0" && input === "") {
-      setInput("0.")
+    if (inputValue === "0" || val === "0" && inputValue === "") {
+      setInputValue("0.")
     } else {
-      setInput(input + val);
+      setInputValue(inputValue + val);
     }
   }
 
   const clearInput = () => {
-    setInput("");
+    setInputValue("");
   }
 
   const count = val => {
-    console.log(input)
-    if (input.toString() !== "" && input.toString().slice(-1).match(regex) == null) {
-      setInput(input + val);
-    } else if (input !== "") {
-      setInput(input.toString().slice(0, -1) + val);
+    if (inputValue.toString() !== "" && inputValue.toString().slice(-1).match(regex) == null) {
+      setInputValue(inputValue + val);
+    } else if (inputValue !== "") {
+      setInputValue(inputValue.toString().slice(0, -1) + val);
     }
   }
 
   const evaluate = () => {
-    if (input !== "" && input.toString().slice(-1).match(regex) == null) {
-      setInput(eval(input))
-    } else if (input !== "") {
-      setInput(eval(input.toString().slice(0, -1)))
+    if (inputValue !== "" && inputValue.toString().slice(-1).match(regex) == null) {
+      setInputValue(eval(inputValue))
+    } else if (inputValue !== "") {
+      setInputValue(eval(inputValue.toString().slice(0, -1)))
     }
   }
 
   const addDot = () => {
-    if (input === "" || input === "0" && input.toString().slice(-1).match(regex) == null) {
-      setInput("0.")
-    } else if (input.toString().slice(-1).match(regex)) {
-      setInput(input)
+    if (inputValue === "" || inputValue === "0" && inputValue.toString().slice(-1).match(regex) == null) {
+      setInputValue("0.")
+    } else if (inputValue.toString().slice(-1).match(regex)) {
+      setInputValue(inputValue)
     }
     else {
-      setInput(input + ".")
+      setInputValue(inputValue + ".")
     }
   }
 
   return (
     <div className={style.calcContainer}>
       <div className={style.row}>
-        <Result input={input} />
+        <Result input={inputValue} />
         <ClearButton handleClear={clearInput}>Clear</ClearButton>
       </div>
       <div className={style.numberContainer}>
