@@ -1,0 +1,16 @@
+.calcContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.row {
+    justify-content: center;
+    display: flex;
+}
+
+.numbersContainer {
+    display: flex;
+    flex-direction: column;
+}
