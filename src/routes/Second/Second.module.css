@@ -1,0 +1,25 @@
+.listItem {
+    margin:5px;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    width:200px;
+    justify-content: space-between;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.button {
+cursor:pointer;
+padding:5px;
+margin:5px;
+background:grey;
+}
+.text{
+    word-break: break-word;
+    text-align:center;
+    padding: 5px;
+    margin: 5px;
+}

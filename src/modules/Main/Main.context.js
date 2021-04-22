@@ -8,8 +8,16 @@ export const MainProvider = ({ children }) => {
   const addResult = (value) => {
     setResults([...results, value])
   }
+  const removeResult = (value )=>{
+    for( let i = 0; i < results.length; i++){
+        if ( results[i] === value) {
+          results.splice(i, 1);
+        }
+    }
+    setResults([...results])
+  }
   return (
-    <MainContext.Provider value={{ results, addResult }}>
+    <MainContext.Provider value={{ results, addResult, removeResult }}>
       {children}
     </MainContext.Provider>
   )
