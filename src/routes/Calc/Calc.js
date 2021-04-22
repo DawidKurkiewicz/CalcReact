@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import Button from "../../components/Button";
-import Result from "../../components/Result";
-import ClearButton from "../../components/ClearButton";
+import { Button, Result, ClearButton } from "components";
 import style from "./Calc.module.css";
+import { useMainContext } from 'modules';
+import { Link } from 'react-router-dom';
 
 export const Calc = () => {
   const [inputValue, setInputValue] = useState('');
+  const { addResult } = useMainContext();
   const regex = new RegExp(/[\W_]/);
 
   const addValue = val => {
-    if (inputValue === "0" || val === "0" && inputValue === "") {
+    if (inputValue === "0" || (val === "0" && inputValue === "")) {
       setInputValue("0.")
     } else {
       setInputValue(inputValue + val);
@@ -30,14 +31,20 @@ export const Calc = () => {
 
   const evaluate = () => {
     if (inputValue !== "" && inputValue.toString().slice(-1).match(regex) == null) {
-      setInputValue(eval(inputValue))
+      // eslint-disable-next-line
+     const result = eval(inputValue)
+      addResult(result)
+      setInputValue(result)
     } else if (inputValue !== "") {
-      setInputValue(eval(inputValue.toString().slice(0, -1)))
+      // eslint-disable-next-line
+      const result = eval(inputValue.toString().slice(0, -1))
+      addResult(result)
+      setInputValue(result)
     }
   }
 
   const addDot = () => {
-    if (inputValue === "" || inputValue === "0" && inputValue.toString().slice(-1).match(regex) == null) {
+    if (inputValue === "" || (inputValue === "0" && inputValue.toString().slice(-1).match(regex) == null)) {
       setInputValue("0.")
     } else if (inputValue.toString().slice(-1).match(regex)) {
       setInputValue(inputValue)
@@ -49,6 +56,8 @@ export const Calc = () => {
 
   return (
     <div className={style.calcContainer}>
+            <Link to="/Second">Second</Link>
+
       <div className={style.row}>
         <Result inputValue={inputValue} />
         <ClearButton handleClear={clearInput}>Clear</ClearButton>
