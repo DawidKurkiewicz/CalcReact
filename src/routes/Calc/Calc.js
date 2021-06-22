@@ -56,7 +56,8 @@ export const Calc = () => {
 
   return (
     <div className={style.calcContainer}>
-            <Link to="/Second">Second</Link>
+            <Link to="/Second">Results</Link>
+            <Link to="/Chat">Chat</Link>
 
       <div className={style.row}>
         <Result inputValue={inputValue} />

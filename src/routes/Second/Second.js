@@ -7,6 +7,8 @@ export const Second = () => {
   return (
     <div className={style.container}>
       <Link to="/Calc">Calc</Link>
+      <Link to="/Chat">Chat</Link>
+
      { results.map ((result) => (
        <div className={style.listItem}>
          <p className = {style.text}>{result}</p>
