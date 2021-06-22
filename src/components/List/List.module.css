@@ -1,15 +1,9 @@
-.user{
-    background: lightblue;
-    display:flex;
-    align-items:center;
-    cursor:pointer;
-    margin:5px;
-}
-.container{
-    display: flex;
-    align-items: flex-end;
-    flex-direction: column;
-}
-p{
-    margin:1px
-}
+ .container {
+     display: flex;
+     align-items: flex-end;
+     flex-direction: column;
+ }
+ 
+ p {
+     margin: 1px
+ }

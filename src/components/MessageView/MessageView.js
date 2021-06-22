@@ -2,22 +2,14 @@ import React, { useContext, useState } from "react";
 import { ChatContext } from "modules";
 import styles from "./MessageView.module.css";
 import { BiSend } from "react-icons/bi";
+import { Message} from "components";
 
-const Message = ({ content, time, status }) => {
-  const { send, received, timeStampStyle, message } = styles;
-  return (
-    <div className={[status === 'received' ? received : send, message].join(' ')}>
-      <p >{content}</p>
-      <p className={timeStampStyle}>{time}</p>
-    </div>
-  );
-};
 export const MessageView = () => {
   const [inputValue, setInputValue] = useState("");
 
   const { container, header, wrapper, inputWrapper, input } = styles;
   const { users, userMessagesID } = useContext(ChatContext);
-  let filterResult = users.filter(el => {
+  const filterResult = users.filter(el => {
     return el.id === userMessagesID
   })
   let mess;
@@ -30,7 +22,7 @@ export const MessageView = () => {
   }
   const getDate = () => {
 
-    let today = new Date();
+    const today = new Date();
     const dd = String(today.getDate()).padStart(2, '0');
     const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     const yyyy = today.getFullYear();
@@ -40,8 +32,8 @@ export const MessageView = () => {
     }
     const time = today.getHours() + "." + minutes
 
-    today = dd + '.' + mm + '.' + yyyy + '(' + time + ')'
-    return today
+    const day = dd + '.' + mm + '.' + yyyy + '(' + time + ')'
+    return day
   }
   const addInputValueToUserArray = () => {
     if (!inputValue) return;
