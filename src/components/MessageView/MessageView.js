@@ -10,9 +10,7 @@ export const MessageView = () => {
   const filterResult = users.filter(el => {
     return el.id === userMessagesID
   })
-  let personName;
-  console.log(filterResult.length)
-  personName = filterResult[0]?.name
+  const personName = filterResult[0]?.name
   console.log(personName)
   const getDate = () => {
 
@@ -47,7 +45,7 @@ export const MessageView = () => {
     <div className={s.wrapper}>
       {filterResult.length === 0 ? <h1 className={s.header}>Please choose person</h1> : <h1 className={s.header}>{personName}</h1>}
       <div className={s.container}>
-      {filterResult.length > 0 &&filterResult[0].conversation.map(el =>
+      {filterResult.length > 0 && filterResult[0].conversation.map(el =>
             <Message
               content={el.content}
                 time={el.timestamp}
