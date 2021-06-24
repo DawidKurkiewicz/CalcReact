@@ -1,25 +1,16 @@
 import React, { useContext, useState } from "react";
 import { ChatContext } from "modules";
-import styles from "./MessageView.module.css";
+import s from "./MessageView.module.css";
 import { BiSend } from "react-icons/bi";
 import { Message} from "components";
 
 export const MessageView = () => {
   const [inputValue, setInputValue] = useState("");
-
-  const { container, header, wrapper, inputWrapper, input } = styles;
   const { users, userMessagesID } = useContext(ChatContext);
   const filterResult = users.filter(el => {
     return el.id === userMessagesID
   })
-  let mess;
   let personName;
-  if (filterResult.length > 0) {
-    personName = filterResult[0].name
-    mess = filterResult[0].conversation.map(el => {
-      return <Message content={el.content} time={el.timestamp} status={el.status} key={Math.random()} />
-    })
-  }
   const getDate = () => {
 
     const today = new Date();
@@ -50,17 +41,26 @@ export const MessageView = () => {
     setInputValue(e.target.value);
   };
   return (
-    <div className={wrapper}>
-      {filterResult.length === 0 ? <h1 className={header}>Please choose person</h1> : <h1 className={header}>{personName}</h1>}
-      <div className={container}>
-        {filterResult.length === 0 ? null : mess}
+    <div className={s.wrapper}>
+      {filterResult.length === 0 ? <h1 className={s.header}>Please choose person</h1> : <h1 className={s.header}>{personName}</h1>}
+      <div className={s.container}>
+      {filterResult.length > 0 && (
+        filterResult[0].conversation.map(el => {
+          return (
+            <Message
+                content={el.content}
+                time={el.timestamp}
+                status={el.status}
+                key={Math.random()}
+            />)})
+        )}
       </div>
-      {filterResult.length === 0 ? null : <div className={inputWrapper}>
+      {filterResult.length === 0 ? null : <div className={s.inputWrapper}>
         <input
           onChange={inputValueHandler}
           value={inputValue}
           type="text"
-          className={input} />
+          className={s.input} />
         <button onClick={() => addInputValueToUserArray()}><BiSend /></button></div>}
     </div>
   )

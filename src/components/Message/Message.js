@@ -1,12 +1,9 @@
-import styles from "./Message.module.css";
+import s from "./Message.module.css";
 
 
-export const Message = ({ content, time, status }) => {
-    const { send, received, timeStampStyle, message } = styles;
-    return (
-      <div className={[status === 'received' ? received : send, message].join(' ')}>
+export const Message = ({ content, time, status }) => (
+      <div className={[status === 'received' ? s.received : s.send, s.message].join(' ')}>
         <p >{content}</p>
-        <p className={timeStampStyle}>{time}</p>
+        <p className={s.timeStampStyle}>{time}</p>
       </div>
     );
-  };

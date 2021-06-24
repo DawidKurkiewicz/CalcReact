@@ -1,9 +1,9 @@
 import React, { createContext, useState } from "react";
-import {arr} from "./Chat.const.js";
+import {chatMock} from "./Chat.const.js";
 export const ChatContext = createContext();
 
 export const ChatProvider = ({ children }) => {
-  const [users, setUsers] = useState(arr);
+  const [users, setUsers] = useState(chatMock);
   const [userMessagesID, showUserMessages] = useState(null);
 
   return (

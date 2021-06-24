@@ -1,18 +1,16 @@
-import styles from "./Chat.module.css";
+import s from "./Chat.module.css";
 import { List } from "components/List";
 import { MessageView } from "components/MessageView";
 import { ChatProvider } from "modules";
 import { Link } from 'react-router-dom';
 
-const { list, linksContainer } = styles;
-
 export const Chat = () => (
   <ChatProvider>
-    <div className={linksContainer}>
+    <div className={s.linksContainer}>
       <Link to="/Calc">Calc</Link>
       <Link to="/Second">Results</Link>
     </div>
-    <div className={list}>
+    <div className={s.list}>
       <MessageView />
       <List />
     </div>
