@@ -1,0 +1,9 @@
+ .container {
+     display: flex;
+     align-items: flex-end;
+     flex-direction: column;
+ }
+ 
+ p {
+     margin: 1px
+ }

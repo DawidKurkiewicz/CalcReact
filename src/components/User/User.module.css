@@ -1,0 +1,7 @@
+.user {
+    background: lightblue;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin: 5px;
+}
