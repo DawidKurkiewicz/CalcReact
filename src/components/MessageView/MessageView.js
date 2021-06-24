@@ -47,16 +47,14 @@ export const MessageView = () => {
     <div className={s.wrapper}>
       {filterResult.length === 0 ? <h1 className={s.header}>Please choose person</h1> : <h1 className={s.header}>{personName}</h1>}
       <div className={s.container}>
-      {filterResult.length > 0 && (
-        filterResult[0].conversation.map(el => {
-          return (
+      {filterResult.length > 0 &&filterResult[0].conversation.map(el =>
             <Message
-                content={el.content}
+              content={el.content}
                 time={el.timestamp}
                 status={el.status}
                 key={Math.random()}
-            />)})
-        )}
+            />
+            )}
       </div>
       {filterResult.length === 0 ? null : <div className={s.inputWrapper}>
         <input
