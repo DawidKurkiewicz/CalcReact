@@ -11,7 +11,9 @@ export const MessageView = () => {
     return el.id === userMessagesID
   })
   let personName;
-  personName = filterResult[0].name
+  console.log(filterResult.length)
+  personName = filterResult[0]?.name
+  console.log(personName)
   const getDate = () => {
 
     const today = new Date();
