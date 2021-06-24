@@ -10,7 +10,7 @@ export const Second = () => {
       <Link to="/Chat">Chat</Link>
 
       {results.map((result) => (
-        <div className={style.listItem}>
+        <div key={Math.random()}className={style.listItem}>
           <p className={style.text}>{result}</p>
           <button className={style.button} onClick={() => removeResult(result)}>delete</button>
         </div>
