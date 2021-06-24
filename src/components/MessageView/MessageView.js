@@ -18,10 +18,7 @@ export const MessageView = () => {
     const dd = String(today.getDate()).padStart(2, '0');
     const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     const yyyy = today.getFullYear();
-    let minutes = today.getMinutes()
-    if (minutes < 10) {
-      minutes = '0' + minutes
-    }
+    const minutes = today.getMinutes() < 10 ? '0' + today.getMinutes() : today.getMinutes()
     const time = today.getHours() + "." + minutes
 
     const day = dd + '.' + mm + '.' + yyyy + '(' + time + ')'
