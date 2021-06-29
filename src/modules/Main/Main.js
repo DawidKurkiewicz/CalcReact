@@ -1,10 +1,13 @@
+import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Calc, Second, Chat } from 'routes';
-import { MainProvider } from './Main.context';
+// import { MainProvider } from './Main.context';
 import style from "./Main.module.css";
+import { getStore } from './Main.redux';
+
 
 export const Main = () => (
-  <MainProvider>
+  <Provider store={getStore()}>
     <Router>
       <Route exact path="/">
         <Link className={style.link} to="/Calc">Calc</Link>
@@ -17,5 +20,5 @@ export const Main = () => (
       <Route exact path="/Chat" component={Chat} />
 
     </Router>
-  </MainProvider>
+  </Provider>
 );
