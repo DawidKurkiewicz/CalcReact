@@ -8,10 +8,7 @@ import style from "./Calc.module.css";
 import { Link } from 'react-router-dom';
 
 //2
-// import { addResult, setIsLoading} from 'modules/Calc/Calc.redux';
-import {setIsLoading,addRValue, clearRInput, countR, evaluateR, addDotR} from 'modules/Calc/Calc.redux';
 
-import { connect } from 'react-redux';
 
 //3
 //   const CalcComponent = ({addResult,setIsLoading}) => { 
@@ -104,64 +101,42 @@ import { connect } from 'react-redux';
 //       </div>
 //     </div>
 //   );
-const CalcComponent = ({inputValue,setIsLoading ,addRValue, clearRInput, countR, evaluateR, addDotR }) => {
-  return (
-    <div className={style.calcContainer}>
-            <Link to="/Second">Results</Link>
-            <button onClick={() => setIsLoading()}>set calc is loading</button>
-            <Link to="/Chat">Chat</Link>
-
+const CalcComponent = ({ inputValue, setIsLoading, addRValue, clearRInput, countR, evaluateR, addDotR }) => (
+  <div className={style.calcContainer}>
+    <Link to="/Second">Results</Link>
+    <button onClick={setIsLoading}>set calc is loading</button>
+    <Link to="/Chat">Chat</Link>
+    <div className={style.row}>
+      <Result inputValue={inputValue} />
+      <ClearButton handleClear={clearRInput}>Clear</ClearButton>
+    </div>
+    <div className={style.numberContainer}>
       <div className={style.row}>
-        <Result inputValue={inputValue} />
-        <ClearButton handleClear={clearRInput}>Clear</ClearButton>
+        <Button handleClick={addRValue}>7</Button>
+        <Button handleClick={addRValue}>8</Button>
+        <Button handleClick={addRValue}>9</Button>
+        <Button handleClick={countR}>/</Button>
       </div>
-      <div className={style.numberContainer}>
-        <div className={style.row}>
-
-          <Button handleClick={addRValue}>7</Button>
-          <Button handleClick={addRValue}>8</Button>
-          <Button handleClick={addRValue}>9</Button>
-          <Button handleClick={countR}>/</Button>
-        </div>
-        <div className={style.row}>
-          <Button handleClick={addRValue}>4</Button>
-          <Button handleClick={addRValue}>5</Button>
-          <Button handleClick={addRValue}>6</Button>
-          <Button handleClick={countR}>*</Button>
-        </div>
-        <div className={style.row}>
-          <Button handleClick={addRValue}>1</Button>
-          <Button handleClick={addRValue}>2</Button>
-          <Button handleClick={addRValue}>3</Button>
-          <Button handleClick={countR}>+</Button>
-        </div>
-        <div className={style.row}>
-          <Button handleClick={addDotR}>.</Button>
-          <Button handleClick={addRValue}>0</Button>
-          <Button handleClick={evaluateR}>=</Button>
-          <Button handleClick={countR}>-</Button>
-        </div>
+      <div className={style.row}>
+        <Button handleClick={addRValue}>4</Button>
+        <Button handleClick={addRValue}>5</Button>
+        <Button handleClick={addRValue}>6</Button>
+        <Button handleClick={countR}>*</Button>
+      </div>
+      <div className={style.row}>
+        <Button handleClick={addRValue}>1</Button>
+        <Button handleClick={addRValue}>2</Button>
+        <Button handleClick={addRValue}>3</Button>
+        <Button handleClick={countR}>+</Button>
+      </div>
+      <div className={style.row}>
+        <Button handleClick={addDotR}>.</Button>
+        <Button handleClick={addRValue}>0</Button>
+        <Button handleClick={evaluateR}>=</Button>
+        <Button handleClick={countR}>-</Button>
       </div>
     </div>
-  );
-}
-const mapStateToProps = (state) => ({
-  isLoading: state.calcReducer.isLoading,
-  results: state.calcReducer.results,
-  //4
-  inputValue: state.calcReducer.inputValue
-})
+  </div>
+);
 
-const mapDispatchToProps = (dispatch) => ({
-  setIsLoading: () => dispatch(setIsLoading()),
-  //5
-  // addResult: (result) => dispatch(addResult(result)),
-  addRValue: (val) => dispatch(addRValue(val)),
-  clearRInput: () => dispatch(clearRInput()),
-  countR:(val)=>dispatch(countR(val)),
-  evaluateR:()=> dispatch(evaluateR()),
-  addDotR:()=> dispatch(addDotR())
-
-})
-
-export const Calc = connect(mapStateToProps, mapDispatchToProps)(CalcComponent)
+export default CalcComponent;

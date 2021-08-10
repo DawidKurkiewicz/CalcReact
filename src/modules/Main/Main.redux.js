@@ -2,6 +2,7 @@ import { chatReducer } from '../Chat/Chat.redux';
 import { calcReducer } from '../Calc/Calc.redux';
 
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
 
 export const getStore = () => {
   const reducers = combineReducers({
@@ -17,8 +18,7 @@ export const getStore = () => {
       compose
 
   const middlewares = [
-    // routerMiddleware(history),
-    // saveChangesMiddleware
+    thunk,
   ]
 
   return createStore(

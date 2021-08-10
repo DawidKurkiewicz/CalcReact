@@ -13,14 +13,48 @@ export const setIsLoading = () => ({
     type: CALC_SET_IS_LOADING,
 })
 
-export const addResult = (val) => ({
-    type: CALC_ADD_RESULT,
-    value: val
+export const fetchResult = (val) => async (dispatch, getState) => {
+    dispatch(addResultLoading(true));
+
+    try {
+        const data = await fetch('/asdfasdf.ksdfgsdf');
+        dispatch(addResultSuccess(data))
+    } catch (e) {
+        dispatch(addResultError(e))
+    }
+}
+
+export const addResultLoading = (isLoading) => ({
+    type: CALC_ADD_RESULT_LOADING,
+    isLoading
 })
-export const removeResult = (val) => ({
-    type: CALC_REMOVE_RESULT,
-    value: val
+
+export const addResultSuccess = (data) => ({
+    type: CALC_ADD_RESULT_DATA,
+    data
 })
+
+export const addResultError = (error) => ({
+    type: CALC_ADD_RESULT_ERROR,
+    error
+})
+
+export const removeResult = (val) => (dispatch, getState) => {
+    const state = getState();
+    let results;
+
+    for (let i = 0; i < state.results.length; i++) {
+        if (state.results[i] === action.value) {
+            results = state.results.slice(i, 1);
+        }
+    }
+
+    dispatch({
+        type: CALC_REMOVE_RESULT,
+        results
+    })
+}
+
 //2
 export const addRValue = (val) => ({
     type: CALC_ADD_VALUE,
@@ -49,6 +83,20 @@ export const initialState = {
 //4
 const regex = new RegExp(/[\W_]/);
 
+const actionMap = {
+    [CALC_SET_IS_LOADING]: (store, { payload }) => ({
+        ...store,
+        action: payload
+    }),
+    [CALC_REMOVE_RESULT]: (store, action) => ({
+
+    })
+}
+
+const createReducer = (actionMap) => (store, action) =>
+    actionMap[action.type](store, action)
+
+
 export const calcReducer = (store = initialState, action) => {
     switch (action.type) {
         case CALC_SET_IS_LOADING:
@@ -63,17 +111,9 @@ export const calcReducer = (store = initialState, action) => {
                 results: [...store.results, action.value]
             }
         case CALC_REMOVE_RESULT:
-            console.log(store.results.length)
-            console.log(action)
-            for (let i = 0; i < store.results.length; i++) {
-                if (store.results[i] === action.value) {
-                    store.results.splice(i, 1);
-                }
-            }
             return {
                 ...store,
-                results: [...store.results]
-
+                results: action.results
             }
             //5
         case CALC_ADD_VALUE:
