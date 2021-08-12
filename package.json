@@ -14,6 +14,8 @@
     "react-scripts": "4.0.3",
     "react-test-renderer": "^17.0.2",
     "redux": "^4.1.0",
+    "redux-thunk": "^2.3.0",
+    "reduxsauce": "^1.2.1",
     "web-vitals": "^1.1.1"
   },
   "scripts": {
