@@ -5,7 +5,7 @@ import { BiSend } from "react-icons/bi";
 import { Message} from "components";
 
 export const MessageView = () => {
-  const [inputValue, setInputValue] = useState("");
+  const [inputValueChat, setInputValue] = useState("");
   const { users, userMessagesID } = useContext(ChatContext);
   const filterResult = users.filter(el => {
     return el.id === userMessagesID
@@ -25,12 +25,12 @@ export const MessageView = () => {
     return day
   }
   const addInputValueToUserArray = () => {
-    if (!inputValue) return;
-    console.log(inputValue)
+    if (!inputValueChat) return;
+    console.log(inputValueChat)
     filterResult[0].conversation.push({
       status: 'send',
       timestamp: getDate(),
-      content: inputValue
+      content: inputValueChat
     })
     console.log(filterResult)
     setInputValue('')
@@ -54,7 +54,7 @@ export const MessageView = () => {
       {filterResult.length === 0 ? null : <div className={s.inputWrapper}>
         <input
           onChange={inputValueHandler}
-          value={inputValue}
+          value={inputValueChat}
           type="text"
           className={s.input} />
         <button onClick={() => addInputValueToUserArray()}><BiSend /></button></div>}
