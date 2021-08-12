@@ -2,7 +2,6 @@ import { createReducer } from 'reduxsauce'
 export const INITIAL_STATE = { isLoading: false, results: [], inputValue: '' }
 export const CALC_SET_IS_LOADING = 'SET CALC IS LOADING'
 export const CALC_REMOVE_RESULT = 'REMOVE CALC RESULT'
-export const CALC_ADD_RESULT = 'ADD CALC RESULT'
 export const CALC_ADD_VALUE = 'ADD CALC VALUE'
 export const CALC_CLEAR = 'CLEAR INPUT'
 export const CALC_COUNT = 'COUNT'
@@ -10,12 +9,10 @@ export const CALC_EVAL = 'EVAL'
 export const CALC_DOT = 'DOT'
 
 export const HANDLERS = {
-    [CALC_SET_IS_LOADING]: (state = INITIAL_STATE, { isLoading }) =>
-        ({ ...state, isLoading: !isLoading }),
-    [CALC_REMOVE_RESULT]: (state = INITIAL_STATE, { results }) => ({
-        ...state, results
+    [CALC_SET_IS_LOADING]: (state = INITIAL_STATE, { isLoading }) =>({
+        ...state, isLoading: !isLoading
     }),
-    [CALC_ADD_RESULT]: (state = INITIAL_STATE, { results }) => ({
+    [CALC_REMOVE_RESULT]: (state = INITIAL_STATE, { results }) => ({
         ...state, results
     }),
     [CALC_ADD_VALUE]: (state = INITIAL_STATE, { inputValue }) => ({
@@ -27,8 +24,8 @@ export const HANDLERS = {
     [CALC_COUNT]: (state = INITIAL_STATE, { inputValue }) => ({
         ...state, inputValue
     }),
-    [CALC_EVAL]: (state = INITIAL_STATE, { results }) => ({
-        ...state, results
+    [CALC_EVAL]: (state = INITIAL_STATE, { action }) => ({
+        ...state, action
     }),
     [CALC_DOT]: (state = INITIAL_STATE, { inputValue }) => ({
         ...state, inputValue
@@ -42,13 +39,6 @@ export const setIsLoading = (isLoading) => ({
     value: isLoading
 })
 
-export const addResult = (val) => (dispatch, getState) => {
-    const store = getState().calcReducer;
-    dispatch({
-        type: CALC_ADD_RESULT,
-        results: [...store.results, val]
-    })
-}
 export const removeResult = (val) => (dispatch, getState) => {
     const store = getState().calcReducer;
     console.log(store)
@@ -115,10 +105,11 @@ export const evaluateR = () => (dispatch, getState) => {
         store.results = [...store.results, result]
         store.inputValue = result
     }
+    console.log(store)
     dispatch({
         type: CALC_EVAL,
         results: store.results,
-        inputValue: store.inputValue
+        inputValue: store.inputValue,
     })
 }
 
